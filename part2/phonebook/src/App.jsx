@@ -92,6 +92,10 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
+      .catch(error => {
+        const errorMessage = error.response?.data?.error || 'Could not fetch phonebook data'
+        showNotification(errorMessage, 'error')
+      })
   }, [])
 
   const showNotification = (message, type = 'success') => {
@@ -129,12 +133,18 @@ const App = () => {
             setNewNumber('')
             showNotification(`Changed ${returnedPerson.name}`)
           })
-          .catch(() => {
-            showNotification(
-              `Information of ${existingPerson.name} has already been removed from server`,
-              'error'
-            )
-            setPersons(persons.filter(person => person.id !== existingPerson.id))
+          .catch(error => {
+            const errorMessage = error.response?.data?.error
+
+            if (errorMessage) {
+              showNotification(errorMessage, 'error')
+            } else {
+              showNotification(
+                `Information of ${existingPerson.name} has already been removed from server`,
+                'error'
+              )
+              setPersons(persons.filter(person => person.id !== existingPerson.id))
+            }
           })
       }
 
@@ -154,6 +164,10 @@ const App = () => {
         setNewNumber('')
         showNotification(`Added ${returnedPerson.name}`)
       })
+      .catch(error => {
+        const errorMessage = error.response?.data?.error || 'Something went wrong'
+        showNotification(errorMessage, 'error')
+      })
   }
 
   const removePerson = (id, name) => {
@@ -166,12 +180,18 @@ const App = () => {
           setPersons(persons.filter(person => person.id !== id))
           showNotification(`Deleted ${name}`)
         })
-        .catch(() => {
-          showNotification(
-            `Information of ${name} has already been removed from server`,
-            'error'
-          )
-          setPersons(persons.filter(person => person.id !== id))
+        .catch(error => {
+          const errorMessage = error.response?.data?.error
+
+          if (errorMessage) {
+            showNotification(errorMessage, 'error')
+          } else {
+            showNotification(
+              `Information of ${name} has already been removed from server`,
+              'error'
+            )
+            setPersons(persons.filter(person => person.id !== id))
+          }
         })
     }
   }
