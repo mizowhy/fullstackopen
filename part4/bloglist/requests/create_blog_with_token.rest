@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer PASTE_TOKEN_HERE
+
+{
+  "title": "Token blog",
+  "author": "Hamza",
+  "url": "https://example.com/token-blog",
+  "likes": 5
+}
