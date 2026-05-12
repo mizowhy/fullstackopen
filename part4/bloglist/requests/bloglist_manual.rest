@@ -43,3 +43,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb
 ### Delete blog with token
 DELETE http://localhost:3003/api/blogs/6a0371754ef475d08d3e33f6
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjZhMDM3MDg0NGVmNDc1ZDA4ZDNlMzNmMyIsImlhdCI6MTc3ODYxMDQyM30.UpyRy2JPXZZSjvuQC-hi93alnV425B71b6GbMwb_mAM
+
+
+
+### test
+POST http://localhost:3003/api/testing/reset
